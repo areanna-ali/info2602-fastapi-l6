@@ -12,7 +12,7 @@ from . import templates
 stats_router = APIRouter()
 
 @stats_router.get("/stats", response_class=HTMLResponse)
-async def stats_page(
+async def stats_view(
     request: Request,
     user: AdminDep
 ):
@@ -26,12 +26,12 @@ async def stats_page(
     )
 
 @stats_router.get("/todo-stats")
-async def stats_page(
+async def stats_data(
     request: Request,
     user: AdminDep,
     db: SessionDep
 ):
-    todos = db.exec(select(Todo)).all()
+    todos = db.exec(select(Todo).join(User)).all()
     res = {}
     for todo in todos:
         if todo.user.username in res:

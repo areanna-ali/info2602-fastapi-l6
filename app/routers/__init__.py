@@ -22,4 +22,7 @@ main_router.include_router(home_router)
 from .stats import stats_router
 main_router.include_router(stats_router)
 
+from .admin import admin_router
+main_router.include_router(admin_router)
+
 
